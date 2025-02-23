@@ -1,0 +1,103 @@
+export const categories = [
+  { id: "restaurant", name: "Restaurantes" },
+  { id: "shop", name: "Tiendas" },
+  { id: "cinema", name: "Cines" },
+  { id: "park", name: "Parques" },
+];
+
+export const places = [
+  {
+    id: "1",
+    name: "Restaurante El Sabor",
+    category: "Restaurantes",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.5,
+    description:
+      "Un restaurante acogedor con una amplia variedad de platos tradicionales.",
+    address: "Calle Principal 123, Ciudad",
+    phone: "+1234567890",
+    website: "https://elsabor.com",
+  },
+  {
+    id: "2",
+    name: "Tienda de Moda Elegante",
+    category: "Tiendas",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.2,
+    description:
+      "Una boutique de moda con las últimas tendencias y diseños exclusivos.",
+    address: "Avenida de la Moda 456, Ciudad",
+    phone: "+1234567891",
+    website: "https://modaelegante.com",
+  },
+  {
+    id: "3",
+    name: "Cine Estrella",
+    category: "Cines",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.7,
+    description:
+      "Un cine moderno con las últimas películas y tecnología de proyección.",
+    address: "Plaza del Cine 789, Ciudad",
+    phone: "+1234567892",
+    website: "https://cineestrella.com",
+  },
+  {
+    id: "4",
+    name: "Parque Central",
+    category: "Parques",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.8,
+    description:
+      "Un hermoso parque con áreas verdes, juegos infantiles y senderos para caminar.",
+    address: "Avenida del Parque 101, Ciudad",
+    phone: "+1234567893",
+    website: "https://parquecentral.com",
+  },
+  {
+    id: "5",
+    name: "Café Aroma",
+    category: "Restaurantes",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.3,
+    description:
+      "Una cafetería acogedora con una selección de cafés de especialidad y pasteles caseros.",
+    address: "Calle del Café 202, Ciudad",
+    phone: "+1234567894",
+    website: "https://cafearoma.com",
+  },
+  {
+    id: "6",
+    name: "Librería Sabiduría",
+    category: "Tiendas",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.6,
+    description:
+      "Una librería con una amplia selección de libros, eventos literarios y un rincón de lectura.",
+    address: "Avenida de los Libros 303, Ciudad",
+    phone: "+1234567895",
+    website: "https://libreriasabiduria.com",
+  },
+  {
+    id: "7",
+    name: "Tienda el chino",
+    category: "Tiendas",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.6,
+    description: "Una donde venden cualquier cosa.",
+    address: "Avenida el chino 420, Ciudad",
+    phone: "+1234567895",
+    website: "https://libreriasabiduria.com",
+  },
+  {
+    id: "8",
+    name: "Chori Pan Pan",
+    category: "Restaurantes",
+    image: "/placeholder.svg?height=200&width=300",
+    rating: 4.6,
+    description: "Venden choripan.",
+    address: "Avenida chori 600, Ciudad",
+    phone: "+1234567895",
+    website: "https://libreriasabiduria.com",
+  },
+];
