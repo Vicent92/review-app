@@ -1,26 +1,32 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { StarIcon } from "lucide-react"
+import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { StarIcon } from "lucide-react";
 
 type Review = {
-  id: string
-  user: string
-  content: string
-  date: string
-  rating: number
-  employeeName: string
-}
+  id: string;
+  user: string;
+  content: string;
+  date: string;
+  rating: number;
+  employeeName: string;
+};
 
 type EmployeeReviewsProps = {
-  placeId: string
-}
+  placeId: string;
+};
 
 export default function EmployeeReviews({ placeId }: EmployeeReviewsProps) {
   const [reviews, setReviews] = useState<Review[]>([
@@ -40,13 +46,13 @@ export default function EmployeeReviews({ placeId }: EmployeeReviewsProps) {
       rating: 4,
       employeeName: "María González",
     },
-  ])
-  const [newReview, setNewReview] = useState("")
-  const [newRating, setNewRating] = useState(0)
-  const [employeeName, setEmployeeName] = useState("")
+  ]);
+  const [newReview, setNewReview] = useState("");
+  const [newRating, setNewRating] = useState(0);
+  const [employeeName, setEmployeeName] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (newReview.trim() && newRating > 0 && employeeName.trim()) {
       const review: Review = {
         id: Date.now().toString(),
@@ -55,13 +61,13 @@ export default function EmployeeReviews({ placeId }: EmployeeReviewsProps) {
         date: new Date().toISOString().split("T")[0],
         rating: newRating,
         employeeName: employeeName.trim(),
-      }
-      setReviews([review, ...reviews])
-      setNewReview("")
-      setNewRating(0)
-      setEmployeeName("")
+      };
+      setReviews([review, ...reviews]);
+      setNewReview("");
+      setNewRating(0);
+      setEmployeeName("");
     }
-  }
+  };
 
   return (
     <div className="space-y-4">
@@ -110,11 +116,15 @@ export default function EmployeeReviews({ placeId }: EmployeeReviewsProps) {
           <CardHeader>
             <div className="flex items-center space-x-4">
               <Avatar>
-                <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${review.user}`} />
+                <AvatarImage
+                  src={`https://api.dicebear.com/6.x/initials/svg?seed=${review.user}`}
+                />
                 <AvatarFallback>{review.user[0]}</AvatarFallback>
               </Avatar>
               <div>
-                <CardTitle className="text-sm font-medium">{review.user}</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  {review.user}
+                </CardTitle>
                 <p className="text-sm text-muted-foreground">{review.date}</p>
               </div>
             </div>
@@ -134,6 +144,5 @@ export default function EmployeeReviews({ placeId }: EmployeeReviewsProps) {
         </Card>
       ))}
     </div>
-  )
+  );
 }
-

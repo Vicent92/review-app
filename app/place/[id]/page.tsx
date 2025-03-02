@@ -20,7 +20,7 @@ export default async function PlaceDetail({
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 max-w-[1100px]">
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start">
@@ -41,7 +41,7 @@ export default async function PlaceDetail({
             alt={place.name}
             width={800}
             height={400}
-            className="w-full h-64 object-cover rounded-lg mb-4"
+            className="w-full h-[500px] object-cover rounded-lg mb-4"
           />
           <p className="text-gray-600 mb-4">{place.description}</p>
           <div className="grid grid-cols-2 gap-4">
