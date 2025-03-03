@@ -7,7 +7,7 @@ import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Review App",
+  title: "OpinaPlace",
   description: "Descubre y reseña lugares de consumo y recreación",
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({
         <header className="bg-white shadow-sm">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/">
-              <h1 className="text-xl font-bold">Review App</h1>
+              <h1 className="text-xl font-bold">OpinaPlace</h1>
             </Link>
             <UserMenu />
           </div>
