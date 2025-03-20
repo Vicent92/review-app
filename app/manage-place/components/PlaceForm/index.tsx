@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { ImageUpload } from "@/components/ImageUpload";
 import { Label } from "@/components/ui/label";
+import { submitPlaceForm } from "../../../actions/placeActionForm";
 
 const placeFormSchema = z.object({
   name: z
@@ -70,6 +71,19 @@ export const PlaceForm = () => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [images, setImages] = useState<string[]>([]);
+  const [state, formAction, isPending] = useActionState(
+    submitPlaceForm,
+    {
+      success: false,
+      errors: null,
+    },
+  )
+
+  useEffect(() => {
+    if (state.success) {
+      setIsEditing(false);
+    }
+  }, [state.success]);
 
   const handleImageUpload = (file: File) => {
     // Simular carga de imagen
@@ -92,14 +106,14 @@ export const PlaceForm = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-8">
+        <form action={formAction} className="space-y-8">
           <div className="space-y-2">
             <Label>Nombre del local</Label>
-            <Input defaultValue={defaultValues.name} disabled={!isEditing} />
+            <Input defaultValue={defaultValues.name} disabled={!isEditing} name="name"/>
           </div>
           <div className="space-y-2">
             <Label>Categoría</Label>
-            <Select defaultValue={defaultValues.category} disabled={!isEditing}>
+            <Select defaultValue={defaultValues.category} disabled={!isEditing} name="category">
               <SelectTrigger>
                 <SelectValue placeholder="Selecciona una categoría" />
               </SelectTrigger>
@@ -118,20 +132,21 @@ export const PlaceForm = () => {
               className="resize-none"
               disabled={!isEditing}
               defaultValue={defaultValues.description}
+              name="description"
             />
             <Label>Máximo 500 caracteres.</Label>
           </div>
           <div className="space-y-2">
             <Label>Dirección</Label>
-            <Input defaultValue={defaultValues.address} disabled={!isEditing} />
+            <Input defaultValue={defaultValues.address} disabled={!isEditing} name="address"/>
           </div>
           <div className="space-y-2">
             <Label>Teléfono</Label>
-            <Input defaultValue={defaultValues.phone} disabled={!isEditing} />
+            <Input defaultValue={defaultValues.phone} disabled={!isEditing} name="phone"/>
           </div>
           <div className="space-y-2">
             <Label>Sitio web</Label>
-            <Input defaultValue={defaultValues.website} disabled={!isEditing} />
+            <Input defaultValue={defaultValues.website} disabled={!isEditing} name="website"/>
             <Label>
               Opcional: Ingresa la URL de tu sitio web si tienes uno.
             </Label>
@@ -157,7 +172,7 @@ export const PlaceForm = () => {
               </div>
             </div>
           )}
-          {isEditing && <Button type="submit">Guardar cambios</Button>}
+          {isEditing && <Button type="submit" onClick={() => setIsEditing(true)}>Guardar cambios</Button>}
         </form>
       </CardContent>
       <CardFooter>

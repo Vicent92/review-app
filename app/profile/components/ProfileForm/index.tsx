@@ -12,11 +12,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
 import { ImageUpload } from "@/components/ImageUpload";
 import { Label } from "@/components/ui/label";
+import { submitProfileForm } from "@/app/actions/profileFormAction";
 
 const profileFormSchema = z.object({
   username: z
@@ -56,6 +57,17 @@ const defaultValues: Partial<ProfileFormValues> = {
 export const ProfileForm = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("https://github.com/shadcn.png");
+  const [state, formAction, isPending] = useActionState(
+    submitProfileForm, {
+    success: false,
+    errors: null,
+  });
+
+  useEffect(() => {
+    if (state.success) {
+      setIsEditing(false);
+    }
+  }, [state.success]);
 
   const handleImageUpload = (file: File) => {
     // Simular carga de imagen
@@ -86,7 +98,7 @@ export const ProfileForm = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <form className="space-y-8">
+        <form action={formAction} className="space-y-8">
           {isEditing && (
             <ImageUpload
               onImageUpload={handleImageUpload}
@@ -98,6 +110,7 @@ export const ProfileForm = () => {
             <Input
               defaultValue={defaultValues.username}
               disabled={!isEditing}
+              name="username"
             />
             <Label>
               Este es tu nombre público. Puede ser tu nombre real o un
@@ -106,7 +119,7 @@ export const ProfileForm = () => {
           </div>
           <div className="space-y-2">
             <Label>Correo electrónico</Label>
-            <Input defaultValue={defaultValues.email} disabled={!isEditing} />
+            <Input defaultValue={defaultValues.email} disabled={!isEditing} name="email"/>
             <Label>
               Tu correo electrónico no será compartido públicamente.
             </Label>
@@ -118,6 +131,7 @@ export const ProfileForm = () => {
               className="resize-none"
               disabled={!isEditing}
               defaultValue={defaultValues.bio}
+              name="bio"
             />
             <Label>Puedes usar hasta 160 caracteres.</Label>
           </div>
